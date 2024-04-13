@@ -39,17 +39,13 @@ public abstract class AbstractRenderer {
 
     public void display() {
         glViewport(0, 0, width, height);
-        String text = this.getClass().getName() + "L Systems beta v0.0 ";
+        String text = "L Systems beta v0.0 ";
 
         pass++;
         // Set the clear color
-        glClearColor(
-                (float) (Math.sin(pass / 100.) / 2 + 0.5),
-                (float) (Math.cos(pass / 200.) / 2 + 0.5),
-                (float) (Math.sin(pass / 300.) / 2 + 0.5),
-                0.0f
-        );
+        //glClearColor();
         // clear the framebuffer
+
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         //create and draw text
@@ -65,10 +61,10 @@ public abstract class AbstractRenderer {
                 // We will detect this in our rendering loop
                 glfwSetWindowShouldClose(window, true);
             if (action == GLFW_RELEASE) {
-                System.out.println("Key release " + key);
+                //System.out.println("Key release " + key);
             }
             if (action == GLFW_PRESS) {
-                System.out.println("Key pressed " + key);
+                //System.out.println("Key pressed " + key);
             }
         }
     };
@@ -79,7 +75,7 @@ public abstract class AbstractRenderer {
             if (w > 0 && h > 0) {
                 width = w;
                 height = h;
-                System.out.println("Windows resize to [" + w + ", " + h + "]");
+                //System.out.println("Windows resize to [" + w + ", " + h + "]");
                 if (textRenderer != null) {
                     textRenderer.resize(width, height);
                 }
@@ -99,11 +95,11 @@ public abstract class AbstractRenderer {
             double y = yBuffer.get(0);
 
             if (button == GLFW_MOUSE_BUTTON_1 && action == GLFW_PRESS) {
-                System.out.println("Mouse button 1 is pressed at cursor position [" + x + ", " + y + "]");
+                //System.out.println("Mouse button 1 is pressed at cursor position [" + x + ", " + y + "]");
             }
 
             if (button == GLFW_MOUSE_BUTTON_1 && action == GLFW_RELEASE) {
-                System.out.println("Mouse button 1 is released at cursor position [" + x + ", " + y + "]");
+                //System.out.println("Mouse button 1 is released at cursor position [" + x + ", " + y + "]");
             }
         }
 
@@ -112,14 +108,14 @@ public abstract class AbstractRenderer {
     protected GLFWCursorPosCallback glfwCursorPosCallback = new GLFWCursorPosCallback() {
         @Override
         public void invoke(long window, double x, double y) {
-            System.out.println("Cursor position [" + x + ", " + y + "]");
+            //System.out.println("Cursor position [" + x + ", " + y + "]");
         }
     };
 
     protected GLFWScrollCallback glfwScrollCallback = new GLFWScrollCallback() {
         @Override
         public void invoke(long window, double dx, double dy) {
-            System.out.println("Mouse wheel velocity " + dy);
+            //System.out.println("Mouse wheel velocity " + dy);
         }
     };
 
