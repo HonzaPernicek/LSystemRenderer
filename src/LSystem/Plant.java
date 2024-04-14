@@ -20,14 +20,13 @@ public class Plant {
                 case 'F':
                     glVertex2f(0,0);
                     glVertex2f(lenght,0);
-
                     glTranslatef(lenght,0,0);
                     break;
                 case 'l':
-                    glRotatef(angle,0,0,1);
+                    glRotatef(-angle,0,0,1f);
                     break;
                 case 'r':
-                    glRotatef(angle,0,0,1);
+                    glRotatef(angle,0,0,1f);
                     break;
                 case '[':
                     glPushMatrix();
@@ -38,7 +37,7 @@ public class Plant {
             }
         }
     }
-    private void expand(){
+    public void expand(){
         String newStr = "";
 
         for(int i = 0; i < str.length(); i++){
@@ -58,5 +57,6 @@ public class Plant {
             }
         }
         str = newStr;
+        System.out.println(str);
     }
 }
