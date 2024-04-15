@@ -12,13 +12,14 @@ public class Renderer extends AbstractRenderer {
 
     public Renderer() {
         super(800, 600);
-        iterations = 5;
+        iterations = 10;
     }
 
     @Override
     public void init() {
         super.init();
-        plant = new Plant("S", 0.2f, (float) (0.2 * Math.PI)); // Initial length and angle
+        //Setting the starting seed for generating the plant
+        plant = new Plant("S", 0.001f, (float) (Math.PI*10));
         expandPlant(); // Expand the plant initially
     }
 
@@ -34,26 +35,23 @@ public class Renderer extends AbstractRenderer {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glMatrixMode(GL_MODELVIEW);
-        // Set color for drawing lines (green)
+
+        //Aligning the plant into viewport
+        glLoadIdentity();
+        glTranslatef(0f,-0.8f,0f);
+        glTranslatef(-0.25f,0f,0f);
+
+
         glColor3f(0.0f, 1.0f, 0.0f);
 
-        glBegin(GL_LINES);
         glPushMatrix();
 
         plant.draw();
 
         glPopMatrix();
 
-        glEnd();
 
 
-
-        /*
-        glVertex2f(0.1f,0f);
-        glVertex2f(0.2f,-0.1f);
-        glLoadIdentity();
-        glTranslatef(-0.3f,0f,0f);
-        */
-
+        //glRotatef(0.2f,0f,0f,1f);
     }
 }
