@@ -8,20 +8,22 @@ public class Plant {
     public String str;
     public float lenght;
     public float angle;
+    public float width;
 
 
-
-    public Plant(String str, float lenght, float angle){
+    public Plant(String str, float lenght, float angle, float width){
         this.str = str;
         this.lenght = lenght;
         this.angle = angle;
-
+        this.width = width;
     }
 
     public void draw(){
         for (int i = 0; i < str.length(); i++){
             switch (str.charAt(i)){
                 case 'F':
+                    glLineWidth(width);
+                    glColor3f(0.0f, 1.0f, 0.0f);
                     glBegin(GL_LINES);
                     glVertex2f(0,0);
                     glVertex2f(0,lenght);
@@ -29,10 +31,10 @@ public class Plant {
 
                     glTranslatef(0,lenght,0);
                     break;
-                case 'l':
+                case '-':
                     glRotatef(-angle, 0, 0, 1f);
                     break;
-                case 'r':
+                case '+':
                     glRotatef(angle, 0, 0, 1f);
                     break;
                 case '[':
@@ -40,6 +42,12 @@ public class Plant {
                     break;
                 case ']':
                     glPopMatrix();
+                    break;
+                case '>': //up the size
+                    width *= 1./0.8;
+                    break;
+                case '<': //down the size
+                    width *= 0.8;
                     break;
             }
         }
@@ -58,9 +66,9 @@ public class Plant {
                     break;
                 case 'B':
                     if((random()*100)<50){
-                        newStr += "[ulFBd][urrFBd]";
+                        newStr += "[<-FB>][<++FB>]";
                     }else{
-                        newStr += "[ullFBd][urFBd]";
+                        newStr += "[<--FB>][<+FB>]";
                     }
                     break;
                 default:

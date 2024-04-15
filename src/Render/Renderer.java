@@ -12,14 +12,14 @@ public class Renderer extends AbstractRenderer {
 
     public Renderer() {
         super(800, 600);
-        iterations = 10;
+        iterations = 8;
     }
 
     @Override
     public void init() {
         super.init();
         //Setting the starting seed for generating the plant
-        plant = new Plant("S", 0.001f, (float) (Math.PI*10));
+        plant = new Plant("S", 0.005f, (float) (Math.PI*8),5);
         expandPlant(); // Expand the plant initially
     }
 
@@ -41,9 +41,6 @@ public class Renderer extends AbstractRenderer {
         glTranslatef(0f,-0.8f,0f);
         glTranslatef(-0.25f,0f,0f);
 
-
-        glColor3f(0.0f, 1.0f, 0.0f);
-
         glPushMatrix();
 
         plant.draw();
@@ -52,6 +49,6 @@ public class Renderer extends AbstractRenderer {
 
 
 
-        //glRotatef(0.2f,0f,0f,1f);
+
     }
 }
