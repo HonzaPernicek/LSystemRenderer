@@ -33,9 +33,11 @@ public class Plant {
                     break;
                 case '-':
                     glRotatef(-angle, 0, 0, 1f);
+                    glRotatef(angle*5,0f,1f,0f);
                     break;
                 case '+':
                     glRotatef(angle, 0, 0, 1f);
+                    glRotatef(angle*5,0f,1f,0f);
                     break;
                 case '[':
                     glPushMatrix();
@@ -66,9 +68,9 @@ public class Plant {
                     break;
                 case 'B':
                     if((random()*100)<50){
-                        newStr += "[<-FB>][<++FB>]";
+                        newStr += "[<-FB>][<++FB>][<--FB>]";
                     }else{
-                        newStr += "[<--FB>][<+FB>]";
+                        newStr += "[<--FB>][<+FB>][<++FB>]";
                     }
                     break;
                 default:

@@ -19,7 +19,7 @@ public class Renderer extends AbstractRenderer {
     public void init() {
         super.init();
         //Setting the starting seed for generating the plant
-        plant = new Plant("S", 0.005f, (float) (Math.PI*8),5);
+        plant = new Plant("S", 0.005f, (float) (Math.PI*5),5);
         expandPlant(); // Expand the plant initially
     }
 
@@ -36,12 +36,15 @@ public class Renderer extends AbstractRenderer {
 
         glMatrixMode(GL_MODELVIEW);
 
+        glRotatef(0.2f,0f,1f,0f);
         //Aligning the plant into viewport
-        glLoadIdentity();
-        glTranslatef(0f,-0.8f,0f);
-        glTranslatef(-0.25f,0f,0f);
+        //glLoadIdentity();
+
 
         glPushMatrix();
+
+        glTranslatef(0f,-0.8f,0f);
+        glTranslatef(-0.25f,0f,0f);
 
         plant.draw();
 
