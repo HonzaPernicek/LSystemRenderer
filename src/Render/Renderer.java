@@ -44,7 +44,6 @@ public class Renderer extends AbstractRenderer {
         glPushMatrix();
 
         glTranslatef(0f,-0.8f,0f);
-        glTranslatef(-0.25f,0f,0f);
 
         plant.draw();
 
