@@ -39,12 +39,9 @@ public abstract class AbstractRenderer {
 
     public void display() {
         glViewport(0, 0, width, height);
-        String text = "L Systems beta v0.0 ";
+        String text = "L Systems beta v0.5. ";
 
         pass++;
-        // Set the clear color
-        //glClearColor();
-        // clear the framebuffer
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

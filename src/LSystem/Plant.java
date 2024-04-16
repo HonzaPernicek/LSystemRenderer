@@ -82,3 +82,5 @@ public class Plant {
         System.out.println(str);
     }
 }
+
+//TODO: Barevnost, interpolace, GUI

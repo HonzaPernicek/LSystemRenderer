@@ -37,9 +37,6 @@ public class Renderer extends AbstractRenderer {
         glMatrixMode(GL_MODELVIEW);
 
         glRotatef(0.2f,0f,1f,0f);
-        //Aligning the plant into viewport
-        //glLoadIdentity();
-
 
         glPushMatrix();
 
