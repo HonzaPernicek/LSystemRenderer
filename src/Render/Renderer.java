@@ -3,6 +3,7 @@ package Render;
 
 import LSystem.Plant;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 
@@ -29,7 +30,7 @@ public class Renderer extends AbstractRenderer {
         super(800, 600);
     }
 
-    private GLFWKeyCallback keyCallback = new GLFWKeyCallback() {
+    private GLFWKeyCallback glfwKeyCallback = new GLFWKeyCallback() {
         @Override
         public void invoke(long window, int key, int scancode, int action, int mods) {
             if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
@@ -40,14 +41,83 @@ public class Renderer extends AbstractRenderer {
             if (action == GLFW_RELEASE) {
                 if(key == GLFW_KEY_ENTER){
                     isEditing = false;
-                }
-                if(isEditing){
-                    text += "F";
-                    System.out.println(text);
+                    System.out.println("Applying change of rules");
+                    switch (field){
+                        case 1:
+                            plant.setRuleS(seed);
+                            plant.clear();
+                            expandPlant();
+                            return;
+                        case 2:
+                            return;
+                        case 3:
+                            plant.setRuleS(text);
+                            plant.clear();
+                            expandPlant();
+                            return;
+                        case 4:
+                            plant.setRuleF(text);
+                            plant.clear();
+                            expandPlant();
+                            return;
+                        case 5:
+                            plant.setRuleB1(text);
+                            plant.clear();
+                            expandPlant();
+                            return;
+                        case 6:
+                            plant.setRuleB2(text);
+                            plant.clear();
+                            expandPlant();
+                            return;
+                    }
+                } else if (isEditing){
+                    //System.out.println(key);
+                    switch (key){
+                        case GLFW_KEY_F:
+                            text += "F";
+                            System.out.println(text);
+                            return;
+                        case GLFW_KEY_S:
+                            text += "S";
+                            System.out.println(text);
+                            return;
+                        case GLFW_KEY_B:
+                            text += "B";
+                            System.out.println(text);
+                            return;
+                        case GLFW_KEY_KP_SUBTRACT:
+                            text += "-";
+                            System.out.println(text);
+                            return;
+                        case GLFW_KEY_KP_ADD:
+                            text += "+";
+                            System.out.println(text);
+                            return;
+                        case 91:
+                            text += "[";
+                            System.out.println(text);
+                            return;
+                        case 93:
+                            text += "]";
+                            System.out.println(text);
+                            return;
+                        case 44:
+                            text += "<";
+                            System.out.println(text);
+                            return;
+                        case 46:
+                            text += ">";
+                            System.out.println(text);
+                            return;
+                        case GLFW_KEY_BACKSPACE:
+                            text = removeLastChar(text);
+                            System.out.println(text);
+
+                    }
                 }
             }
             if (action == GLFW_PRESS) {
-                //System.out.println("Key pressed " + key);
             }
         }
     };
@@ -74,28 +144,40 @@ public class Renderer extends AbstractRenderer {
                 //GUI HERE
                 if(x > 50 && x < 200 && y > 35 && y < 50){
                     System.out.println("Seed");
+                    System.out.println(plant.getSeed());
                     isEditing = true;
                     field = 1;
-                } else if (x > 50 && x < 100 && y > 65 && y < 80) {
+                    System.out.println(text);
+                } else if (x > 50 && x < 200 && y > 65 && y < 80) {
                     System.out.println("Iterations");
+                    System.out.println(iterations);
                     isEditing = true;
                     field = 2;
-                } else if (x > 50 && x < 100 && y > 95 && y < 110) {
+                } else if (x > 50 && x < 200 && y > 95 && y < 110) {
                     System.out.println("Rule S");
-                    isEditing = true;)
+                    System.out.println(plant.getRuleS());
+                    isEditing = true;
                     field = 3;
-                } else if (x > 50 && x < 100 && y > 115 && y < 140) {
+                    text = plant.getRuleS();
+                    System.out.println(text);
+                } else if (x > 50 && x < 200 && y > 115 && y < 140) {
                     System.out.println("Rule F");
+                    System.out.println(plant.getRuleF());
                     isEditing = true;
                     field = 4;
-                } else if (x > 50 && x < 100 && y > 155 && y < 170) {
+                    text = plant.getRuleF();
+                } else if (x > 50 && x < 200 && y > 155 && y < 170) {
                     System.out.println("Rule B1");
+                    System.out.println(plant.getRuleB1());
                     isEditing = true;
                     field = 5;
-                } else if (x > 50 && x < 100 && y > 185 && y < 200) {
+                    text = plant.getRuleB1();
+                } else if (x > 50 && x < 200 && y > 185 && y < 200) {
                     System.out.println("Rule B2");
+                    System.out.println(plant.getRuleB2());
                     isEditing = true;
                     field = 6;
+                    text = plant.getRuleB2();
                 }
             }
         }
@@ -114,6 +196,12 @@ public class Renderer extends AbstractRenderer {
         for (int i = 0; i < iterations; i++) {
             plant.expand();
         }
+    }
+
+    private static String removeLastChar(String s) {
+        return (s == null || s.length() == 0)
+                ? null
+                : (s.substring(0, s.length() - 1));
     }
 
     @Override
@@ -138,10 +226,12 @@ public class Renderer extends AbstractRenderer {
         textRenderer.setScale(1d);
         textRenderer.addStr2D(50, 50, "Seed: " + seed);
         textRenderer.addStr2D(50, 80, "Iterations: " + iterations);
-        textRenderer.addStr2D(50, 110, "Rule 1 : S = " + ruleS);
-        textRenderer.addStr2D(50, 140, "Rule 2 : F = " + ruleF);
-        textRenderer.addStr2D(50, 170, "Rule 3a : B1 = " + ruleB1);
-        textRenderer.addStr2D(50, 200, "Rule 3b : B2 = " + ruleB2);
+        textRenderer.addStr2D(50, 110, "Rule 1 : S = " + plant.getRuleS());
+        textRenderer.addStr2D(50, 140, "Rule 2 : F = " + plant.getRuleF());
+        textRenderer.addStr2D(50, 170, "Rule 3a : B1 = " + plant.getRuleB1());
+        textRenderer.addStr2D(50, 200, "Rule 3b : B2 = " + plant.getRuleB2());
+        textRenderer.addStr2D(50,250, "text console");
+        textRenderer.addStr2D(50,265, text);
 
         textRenderer.addStr2D(width - 200, height - 15, " (c) Jan Mejtřík : Zápočtový projekt");
         textRenderer.draw();

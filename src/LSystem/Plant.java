@@ -4,7 +4,7 @@ import static java.lang.Math.random;
 import static org.lwjgl.opengl.GL11.*;
 
 public class Plant {
-    public String str;
+    public String seed;
     public float lenght;
     public float angle;
     public float width;
@@ -15,41 +15,8 @@ public class Plant {
 
     private float green = 0.1f;
 
-
-    public void setRuleS(String ruleS) {
-        this.ruleS = ruleS;
-    }
-
-    public void setRuleF(String ruleF) {
-        this.ruleF = ruleF;
-    }
-
-    public void setRuleB1(String ruleB1) {
-        this.ruleB1 = ruleB1;
-    }
-
-    public void setRuleB2(String ruleB2) {
-        this.ruleB2 = ruleB2;
-    }
-
-    public String getRuleS() {
-        return ruleS;
-    }
-
-    public String getRuleF() {
-        return ruleF;
-    }
-
-    public String getRuleB1() {
-        return ruleB1;
-    }
-
-    public String getRuleB2() {
-        return ruleB2;
-    }
-
-    public Plant(String str, float lenght, float angle, float width, String ruleS, String ruleF, String ruleB1, String ruleB2){
-        this.str = str;
+    public Plant(String seed, float lenght, float angle, float width, String ruleS, String ruleF, String ruleB1, String ruleB2){
+        this.seed = seed;
         this.lenght = lenght;
         this.angle = angle;
         this.width = width;
@@ -60,8 +27,8 @@ public class Plant {
     }
 
     public void draw(){
-        for (int i = 0; i < str.length(); i++){
-            switch (str.charAt(i)){
+        for (int i = 0; i < seed.length(); i++){
+            switch (seed.charAt(i)){
                 case 'F':
                     glLineWidth(width);
                     glColor3f(0.2f, green, 0.0f);
@@ -102,8 +69,8 @@ public class Plant {
         String newStr = "";
 
         //Setting the rules for generating
-        for(int i = 0; i < str.length(); i++){
-            switch (str.charAt(i)){
+        for(int i = 0; i < seed.length(); i++){
+            switch (seed.charAt(i)){
                 case 'S':
                     newStr += ruleS;
                     break;
@@ -118,13 +85,57 @@ public class Plant {
                     }
                     break;
                 default:
-                    newStr += str.charAt(i);
+                    newStr += seed.charAt(i);
                     break;
             }
         }
-        str = newStr;
-        System.out.println(str);
+        seed = newStr;
+        System.out.println(seed);
+    }
+
+    public String getSeed() {
+        return seed;
+    }
+
+    public void setSeed(String seed) {
+        this.seed = seed;
+    }
+
+    public void setRuleS(String ruleS) {
+        this.ruleS = ruleS;
+    }
+
+    public void setRuleF(String ruleF) {
+        this.ruleF = ruleF;
+    }
+
+    public void setRuleB1(String ruleB1) {
+        this.ruleB1 = ruleB1;
+    }
+
+    public void setRuleB2(String ruleB2) {
+        this.ruleB2 = ruleB2;
+    }
+
+    public String getRuleS() {
+        return ruleS;
+    }
+
+    public String getRuleF() {
+        return ruleF;
+    }
+
+    public String getRuleB1() {
+        return ruleB1;
+    }
+
+    public String getRuleB2() {
+        return ruleB2;
+    }
+
+    public void clear(){
+        seed = "S";
     }
 }
 
-//TODO: GUI
+
