@@ -8,19 +8,23 @@ import static org.lwjgl.opengl.GL11.*;
 public class Renderer extends AbstractRenderer {
 
     Plant plant;
-    int iterations;
+    int iterations = 8;
+    String seed = "S";
+    String ruleS = "FB";
+    String ruleF = "FF";
+    String ruleB1 = "[<-FB>][<++FB>][<--FB>]";
+    String ruleB2 = "[<--FB>][<+FB>][<++FB>]";
 
     public Renderer() {
         super(800, 600);
-        iterations = 8;
     }
 
     @Override
     public void init() {
         super.init();
         //Setting the starting seed for generating the plant
-        plant = new Plant("S", 0.005f, (float) (Math.PI*5),5);
-        expandPlant(); // Expand the plant initially
+        plant = new Plant(seed, 0.005f, (float) (Math.PI*5),10, ruleS, ruleF, ruleB1, ruleB2);
+        expandPlant();
     }
 
     private void expandPlant() {
@@ -46,8 +50,17 @@ public class Renderer extends AbstractRenderer {
 
         glPopMatrix();
 
+        glViewport(0,0,width,height);
+        textRenderer.clear();
+        textRenderer.setScale(1d);
+        textRenderer.addStr2D(50, 50, "Seed: " + seed);
+        textRenderer.addStr2D(50, 80, "Iterations: " + iterations);
+        textRenderer.addStr2D(50, 110, "Rule 1 : S = " + ruleS);
+        textRenderer.addStr2D(50, 140, "Rule 2 : F = " + ruleF);
+        textRenderer.addStr2D(50, 170, "Rule 3a : B1 = " + ruleB1);
+        textRenderer.addStr2D(50, 200, "Rule 3b : B2 = " + ruleB2);
 
-
-
+        textRenderer.addStr2D(width - 200, height - 15, " (c) Jan Mejtřík : Zápočtový projekt");
+        textRenderer.draw();
     }
 }

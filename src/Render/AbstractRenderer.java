@@ -4,6 +4,7 @@ import lwjglutils.OGLTextRenderer;
 import lwjglutils.OGLUtils;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
+import transforms.Camera;
 
 import java.nio.DoubleBuffer;
 
@@ -15,6 +16,8 @@ public abstract class AbstractRenderer {
     private int pass;
     protected int width;
     protected int height;
+    private boolean isEditing = false;
+    private String text;
     protected OGLTextRenderer textRenderer;
 
     public AbstractRenderer(int width, int height) {
@@ -39,16 +42,9 @@ public abstract class AbstractRenderer {
 
     public void display() {
         glViewport(0, 0, width, height);
-        String text = "L Systems beta v0.5. ";
-
         pass++;
-
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        //create and draw text
-        textRenderer.clear();
-        textRenderer.addStr2D(3, 20, text);
-        textRenderer.draw();
     }
 
     protected GLFWKeyCallback glfwKeyCallback = new GLFWKeyCallback() {
@@ -57,8 +53,16 @@ public abstract class AbstractRenderer {
             if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
                 // We will detect this in our rendering loop
                 glfwSetWindowShouldClose(window, true);
+
+            //KEY GUI
             if (action == GLFW_RELEASE) {
-                //System.out.println("Key release " + key);
+                if(key == GLFW_KEY_ENTER){
+                    isEditing = false;
+                }
+                if(isEditing){
+                    text += key;
+                    System.out.println(text);
+                }
             }
             if (action == GLFW_PRESS) {
                 //System.out.println("Key pressed " + key);
@@ -97,6 +101,23 @@ public abstract class AbstractRenderer {
 
             if (button == GLFW_MOUSE_BUTTON_1 && action == GLFW_RELEASE) {
                 //System.out.println("Mouse button 1 is released at cursor position [" + x + ", " + y + "]");
+
+
+                //GUI HERE
+                if(x > 50 && x < 200 && y > 35 && y < 50){
+                    System.out.println("button 1 pressed");
+                    isEditing = true;
+                } else if (x > 50 && x < 100 && y > 65 && y < 80) {
+                    System.out.println("button 2 pressed");
+                } else if (x > 50 && x < 100 && y > 95 && y < 110) {
+                    System.out.println("button 3 pressed");
+                } else if (x > 50 && x < 100 && y > 115 && y < 140) {
+                    System.out.println("button 4 pressed");
+                } else if (x > 50 && x < 100 && y > 155 && y < 170) {
+                    System.out.println("button 5 pressed");
+                } else if (x > 50 && x < 100 && y > 185 && y < 200) {
+                    System.out.println("button 6 pressed");
+                }
             }
         }
 
