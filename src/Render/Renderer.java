@@ -44,11 +44,14 @@ public class Renderer extends AbstractRenderer {
                     System.out.println("Applying change of rules");
                     switch (field){
                         case 1:
-                            plant.setRuleS(seed);
+                            plant.setSeed(seed);
                             plant.clear();
                             expandPlant();
                             return;
                         case 2:
+                            iterations = iterations;
+                            plant.clear();
+                            expandPlant();
                             return;
                         case 3:
                             plant.setRuleS(text);
@@ -72,7 +75,7 @@ public class Renderer extends AbstractRenderer {
                             return;
                     }
                 } else if (isEditing){
-                    //System.out.println(key);
+                    System.out.println(key);
                     switch (key){
                         case GLFW_KEY_F:
                             text += "F";
@@ -147,12 +150,15 @@ public class Renderer extends AbstractRenderer {
                     System.out.println(plant.getSeed());
                     isEditing = true;
                     field = 1;
+                    plant.clear();
+                    text = plant.getSeed();
                     System.out.println(text);
                 } else if (x > 50 && x < 200 && y > 65 && y < 80) {
                     System.out.println("Iterations");
                     System.out.println(iterations);
                     isEditing = true;
                     field = 2;
+                    //text = (String) iterations;
                 } else if (x > 50 && x < 200 && y > 95 && y < 110) {
                     System.out.println("Rule S");
                     System.out.println(plant.getRuleS());
@@ -233,7 +239,7 @@ public class Renderer extends AbstractRenderer {
         textRenderer.addStr2D(50,250, "text console");
         textRenderer.addStr2D(50,265, text);
 
-        textRenderer.addStr2D(width - 200, height - 15, " (c) Jan Mejtřík : Zápočtový projekt");
+        textRenderer.addStr2D(width - 350, height - 15, "L System renderer v 1.0 :Jan Mejtřík : Zápočtový projekt");
         textRenderer.draw();
     }
 
