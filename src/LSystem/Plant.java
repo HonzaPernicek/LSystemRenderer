@@ -32,6 +32,22 @@ public class Plant {
         this.ruleB2 = ruleB2;
     }
 
+    public String getRuleS() {
+        return ruleS;
+    }
+
+    public String getRuleF() {
+        return ruleF;
+    }
+
+    public String getRuleB1() {
+        return ruleB1;
+    }
+
+    public String getRuleB2() {
+        return ruleB2;
+    }
+
     public Plant(String str, float lenght, float angle, float width, String ruleS, String ruleF, String ruleB1, String ruleB2){
         this.str = str;
         this.lenght = lenght;
