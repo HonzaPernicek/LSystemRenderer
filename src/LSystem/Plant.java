@@ -5,7 +5,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Plant {
     public String seed;
-    public float lenght;
+    public float length;
     public float angle;
     public float width;
     public String ruleS;
@@ -16,9 +16,9 @@ public class Plant {
 
     private float green = 0.1f;
 
-    public Plant(String seed, float lenght, float angle, float width, String ruleS, String ruleF, String ruleB1, String ruleB2, int iterations){
+    public Plant(String seed, float length, float angle, float width, String ruleS, String ruleF, String ruleB1, String ruleB2, int iterations){
         this.seed = seed;
-        this.lenght = lenght;
+        this.length = length;
         this.angle = angle;
         this.width = width;
         this.ruleS = ruleS;
@@ -37,10 +37,10 @@ public class Plant {
 
                     glBegin(GL_LINES);
                     glVertex2f(0,0);
-                    glVertex2f(0,lenght);
+                    glVertex2f(0, length);
                     glEnd();
 
-                    glTranslatef(0,lenght,0);
+                    glTranslatef(0, length,0);
                     break;
                 case '-':
                     glRotatef(-angle, 0, 0, 1f);
@@ -57,11 +57,11 @@ public class Plant {
                     glPopMatrix();
                     break;
                 case '>': //up the size
-                    width *= 1./0.7;
+                    width *= (float) (1./0.7);
                     green -= 0.1f;
                     break;
                 case '<': //down the size
-                    width *= 0.7;
+                    width *= 0.7F;
                     green += 0.1f;
                     break;
             }
@@ -69,30 +69,30 @@ public class Plant {
     }
     public void expand() {
         for (int n = 0; n < iterations; n++) {
-            String newStr = "";
+            StringBuilder newStr = new StringBuilder();
 
             //Setting the rules for generating
             for (int i = 0; i < seed.length(); i++) {
                 switch (seed.charAt(i)) {
                     case 'S':
-                        newStr += ruleS;
+                        newStr.append(ruleS);
                         break;
                     case 'F':
-                        newStr += ruleF;
+                        newStr.append(ruleF);
                         break;
                     case 'B':
                         if ((random() * 10) < 5) {
-                            newStr += ruleB1;
+                            newStr.append(ruleB1);
                         } else {
-                            newStr += ruleB2;
+                            newStr.append(ruleB2);
                         }
                         break;
                     default:
-                        newStr += seed.charAt(i);
+                        newStr.append(seed.charAt(i));
                         break;
                 }
             }
-            seed = newStr;
+            seed = newStr.toString();
             System.out.println(seed);
         }
     }

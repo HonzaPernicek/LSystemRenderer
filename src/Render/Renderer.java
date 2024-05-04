@@ -3,7 +3,6 @@ package Render;
 
 import LSystem.Plant;
 import org.lwjgl.BufferUtils;
-import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 
@@ -30,7 +29,7 @@ public class Renderer extends AbstractRenderer {
         super(800, 600);
     }
 
-    private GLFWKeyCallback glfwKeyCallback = new GLFWKeyCallback() {
+    private final GLFWKeyCallback glfwKeyCallback = new GLFWKeyCallback() {
         @Override
         public void invoke(long window, int key, int scancode, int action, int mods) {
             if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
@@ -164,8 +163,6 @@ public class Renderer extends AbstractRenderer {
                             text = removeLastChar(text);
                             System.out.println(text);
                             return;
-
-
                     }
                 }
             }
@@ -249,7 +246,7 @@ public class Renderer extends AbstractRenderer {
     }
 
     private static String removeLastChar(String s) {
-        return (s == null || s.length() == 0)
+        return (s == null || s.isEmpty())
                 ? null
                 : (s.substring(0, s.length() - 1));
     }
@@ -283,7 +280,7 @@ public class Renderer extends AbstractRenderer {
         textRenderer.addStr2D(50,250, "text console");
         textRenderer.addStr2D(50,265, text);
 
-        textRenderer.addStr2D(width - 350, height - 15, "L System renderer v 1.0 :Jan Mejtřík : Zápočtový projekt");
+        textRenderer.addStr2D(width - 350, height - 15, "L System renderer v 1.0 :Jan Mejstřík : Zápočtový projekt");
         textRenderer.draw();
     }
 

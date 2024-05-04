@@ -3,13 +3,7 @@ package Render;
 import LSystem.Plant;
 import lwjglutils.OGLTextRenderer;
 import lwjglutils.OGLUtils;
-import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
-import transforms.Camera;
-
-import java.nio.DoubleBuffer;
-
-import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 public abstract class AbstractRenderer {
@@ -17,19 +11,11 @@ public abstract class AbstractRenderer {
     private int pass;
     protected int width;
     protected int height;
-    Plant plant;
-    private boolean isEditing = false;
-    private String text;
     protected OGLTextRenderer textRenderer;
 
     public AbstractRenderer(int width, int height) {
         this.width = width;
         this.height = height;
-    }
-
-    public AbstractRenderer() {
-        this.width = 600;
-        this.height = 400;
     }
 
     public void init() {
