@@ -1,0 +1,7 @@
+Aplikace nejlépe funguje v oknu na celou obrazovku.
+
+Při stisknutí libovolného nastavení (Seed, iterations, rules...) se otevře textová konzole. V ní lze dynamicky měnit
+text, který se při stisku klávesy ENTER aplikuje na renderovanou rostlinu.
+
+Pro ruční nastavení vykreslení rostliny je potřeba nastavit iterace na 1. Poté lze vložit hotový string s turtle
+ pravidly. Vkládání kopírovaného textu však zatím podporováno není.

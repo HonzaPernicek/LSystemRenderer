@@ -1,6 +1,5 @@
 package Render;
 
-import LSystem.Plant;
 import lwjglutils.OGLTextRenderer;
 import lwjglutils.OGLUtils;
 import org.lwjgl.glfw.*;

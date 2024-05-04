@@ -167,6 +167,7 @@ public class Renderer extends AbstractRenderer {
                 }
             }
             if (action == GLFW_PRESS) {
+                //may be used for further versions
             }
         }
     };
