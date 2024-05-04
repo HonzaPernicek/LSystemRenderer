@@ -12,12 +12,14 @@ public class Plant {
     public String ruleF;
     public String ruleB1;
     public String ruleB2;
+    public String startingSeed;
     public int iterations;
 
     private float green = 0.1f;
 
-    public Plant(String seed, float length, float angle, float width, String ruleS, String ruleF, String ruleB1, String ruleB2, int iterations){
+    public Plant(String seed, String startingSeed, float length, float angle, float width, String ruleS, String ruleF, String ruleB1, String ruleB2, int iterations){
         this.seed = seed;
+        this.startingSeed = startingSeed;
         this.length = length;
         this.angle = angle;
         this.width = width;
@@ -105,6 +107,14 @@ public class Plant {
         this.seed = seed;
     }
 
+    public void setStartingSeed(String startingSeed){
+        this.startingSeed = startingSeed;
+    }
+
+    public String getStartingSeed(){
+        return startingSeed;
+    }
+
     public void setRuleS(String ruleS) {
         this.ruleS = ruleS;
     }
@@ -147,7 +157,7 @@ public class Plant {
     }
 
     public void clear(){
-        seed = "S";
+        seed = startingSeed;
     }
 }
 

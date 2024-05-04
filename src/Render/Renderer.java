@@ -43,7 +43,8 @@ public class Renderer extends AbstractRenderer {
                     System.out.println("Applying change of rules");
                     switch (field){
                         case 1:
-                            plant.setSeed(seed);
+                            seed = text;
+                            plant.setStartingSeed(text);
                             plant.clear();
                             plant.expand();
                             return;
@@ -242,7 +243,7 @@ public class Renderer extends AbstractRenderer {
     public void init() {
         super.init();
         //Setting the starting seed for generating the plant
-        plant = new Plant(seed, 0.005f, (float) (Math.PI*5),10, ruleS, ruleF, ruleB1, ruleB2, iterations);
+        plant = new Plant(seed, seed,0.005f, (float) (Math.PI*5),10, ruleS, ruleF, ruleB1, ruleB2, iterations);
         plant.expand();
     }
 
@@ -272,7 +273,7 @@ public class Renderer extends AbstractRenderer {
         glViewport(0,0,width,height);
         textRenderer.clear();
         textRenderer.setScale(1d);
-        textRenderer.addStr2D(50, 50, "Seed: " + plant.getSeed());
+        textRenderer.addStr2D(50, 50, "Seed: " + plant.getStartingSeed());
         textRenderer.addStr2D(50, 80, "Iterations: " + plant.getIterations());
         textRenderer.addStr2D(50, 110, "Rule 1 : S = " + plant.getRuleS());
         textRenderer.addStr2D(50, 140, "Rule 2 : F = " + plant.getRuleF());
