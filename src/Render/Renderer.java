@@ -281,7 +281,7 @@ public class Renderer extends AbstractRenderer {
         textRenderer.addStr2D(50,250, "text console");
         textRenderer.addStr2D(50,265, text);
 
-        textRenderer.addStr2D(width - 350, height - 15, "L System renderer v 1.0 :Jan Mejstřík : Zápočtový projekt");
+        textRenderer.addStr2D(width - 500, height - 15, "L System renderer v 1.2 :Jan Mejstřík : Zápočtový projekt PGRF : Last updated 4.5. 2024");
         textRenderer.draw();
     }
 
