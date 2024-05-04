@@ -12,10 +12,11 @@ public class Plant {
     public String ruleF;
     public String ruleB1;
     public String ruleB2;
+    public int iterations;
 
     private float green = 0.1f;
 
-    public Plant(String seed, float lenght, float angle, float width, String ruleS, String ruleF, String ruleB1, String ruleB2){
+    public Plant(String seed, float lenght, float angle, float width, String ruleS, String ruleF, String ruleB1, String ruleB2, int iterations){
         this.seed = seed;
         this.lenght = lenght;
         this.angle = angle;
@@ -24,6 +25,7 @@ public class Plant {
         this.ruleF = ruleF;
         this.ruleB1 = ruleB1;
         this.ruleB2 = ruleB2;
+        this.iterations = iterations;
     }
 
     public void draw(){
@@ -65,32 +67,34 @@ public class Plant {
             }
         }
     }
-    public void expand(){
-        String newStr = "";
+    public void expand() {
+        for (int n = 0; n < iterations; n++) {
+            String newStr = "";
 
-        //Setting the rules for generating
-        for(int i = 0; i < seed.length(); i++){
-            switch (seed.charAt(i)){
-                case 'S':
-                    newStr += ruleS;
-                    break;
-                case 'F':
-                    newStr += ruleF;
-                    break;
-                case 'B':
-                    if((random()*10)<5){
-                        newStr += ruleB1;
-                    }else{
-                        newStr += ruleB2;
-                    }
-                    break;
-                default:
-                    newStr += seed.charAt(i);
-                    break;
+            //Setting the rules for generating
+            for (int i = 0; i < seed.length(); i++) {
+                switch (seed.charAt(i)) {
+                    case 'S':
+                        newStr += ruleS;
+                        break;
+                    case 'F':
+                        newStr += ruleF;
+                        break;
+                    case 'B':
+                        if ((random() * 10) < 5) {
+                            newStr += ruleB1;
+                        } else {
+                            newStr += ruleB2;
+                        }
+                        break;
+                    default:
+                        newStr += seed.charAt(i);
+                        break;
+                }
             }
+            seed = newStr;
+            System.out.println(seed);
         }
-        seed = newStr;
-        System.out.println(seed);
     }
 
     public String getSeed() {
@@ -117,6 +121,11 @@ public class Plant {
         this.ruleB2 = ruleB2;
     }
 
+    public void setIterations(int iterations){
+        this.iterations = iterations;
+    }
+
+
     public String getRuleS() {
         return ruleS;
     }
@@ -131,6 +140,10 @@ public class Plant {
 
     public String getRuleB2() {
         return ruleB2;
+    }
+
+    public int getIterations(){
+        return iterations;
     }
 
     public void clear(){

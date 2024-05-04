@@ -46,37 +46,38 @@ public class Renderer extends AbstractRenderer {
                         case 1:
                             plant.setSeed(seed);
                             plant.clear();
-                            expandPlant();
+                            plant.expand();
                             return;
                         case 2:
-                            iterations = iterations;
+                            plant.setIterations(Integer.parseInt(text));
                             plant.clear();
-                            expandPlant();
+                            plant.expand();
                             return;
                         case 3:
                             plant.setRuleS(text);
                             plant.clear();
-                            expandPlant();
+                            plant.expand();
                             return;
                         case 4:
                             plant.setRuleF(text);
                             plant.clear();
-                            expandPlant();
+                            plant.expand();
                             return;
                         case 5:
                             plant.setRuleB1(text);
                             plant.clear();
-                            expandPlant();
+                            plant.expand();
                             return;
                         case 6:
                             plant.setRuleB2(text);
                             plant.clear();
-                            expandPlant();
+                            plant.expand();
                             return;
                     }
                 } else if (isEditing){
                     System.out.println(key);
                     switch (key){
+                        //LETTERS
                         case GLFW_KEY_F:
                             text += "F";
                             System.out.println(text);
@@ -89,6 +90,8 @@ public class Renderer extends AbstractRenderer {
                             text += "B";
                             System.out.println(text);
                             return;
+
+                        //SYMBOLS
                         case GLFW_KEY_KP_SUBTRACT:
                             text += "-";
                             System.out.println(text);
@@ -113,9 +116,55 @@ public class Renderer extends AbstractRenderer {
                             text += ">";
                             System.out.println(text);
                             return;
+
+                        //NUMBERS
+                        case GLFW_KEY_0:
+                            text += "0";
+                            System.out.println(text);
+                            return;
+                        case GLFW_KEY_1:
+                            text += "1";
+                            System.out.println(text);
+                            return;
+                        case GLFW_KEY_2:
+                            text += "2";
+                            System.out.println(text);
+                            return;
+                        case GLFW_KEY_3:
+                            text += "3";
+                            System.out.println(text);
+                            return;
+                        case GLFW_KEY_4:
+                            text += "4";
+                            System.out.println(text);
+                            return;
+                        case GLFW_KEY_5:
+                            text += "5";
+                            System.out.println(text);
+                            return;
+                        case GLFW_KEY_6:
+                            text += "6";
+                            System.out.println(text);
+                            return;
+                        case GLFW_KEY_7:
+                            text += "7";
+                            System.out.println(text);
+                            return;
+                        case GLFW_KEY_8:
+                            text += "8";
+                            System.out.println(text);
+                            return;
+                        case GLFW_KEY_9:
+                            text += "9";
+                            System.out.println(text);
+                            return;
+
+                        //BACKSPACE
                         case GLFW_KEY_BACKSPACE:
                             text = removeLastChar(text);
                             System.out.println(text);
+                            return;
+
 
                     }
                 }
@@ -155,10 +204,11 @@ public class Renderer extends AbstractRenderer {
                     System.out.println(text);
                 } else if (x > 50 && x < 200 && y > 65 && y < 80) {
                     System.out.println("Iterations");
-                    System.out.println(iterations);
+                    System.out.println(plant.getIterations());
                     isEditing = true;
                     field = 2;
-                    //text = (String) iterations;
+                    text = Integer.toString(plant.getIterations());
+                    System.out.println(text);
                 } else if (x > 50 && x < 200 && y > 95 && y < 110) {
                     System.out.println("Rule S");
                     System.out.println(plant.getRuleS());
@@ -194,14 +244,8 @@ public class Renderer extends AbstractRenderer {
     public void init() {
         super.init();
         //Setting the starting seed for generating the plant
-        plant = new Plant(seed, 0.005f, (float) (Math.PI*5),10, ruleS, ruleF, ruleB1, ruleB2);
-        expandPlant();
-    }
-
-    private void expandPlant() {
-        for (int i = 0; i < iterations; i++) {
-            plant.expand();
-        }
+        plant = new Plant(seed, 0.005f, (float) (Math.PI*5),10, ruleS, ruleF, ruleB1, ruleB2, iterations);
+        plant.expand();
     }
 
     private static String removeLastChar(String s) {
@@ -230,8 +274,8 @@ public class Renderer extends AbstractRenderer {
         glViewport(0,0,width,height);
         textRenderer.clear();
         textRenderer.setScale(1d);
-        textRenderer.addStr2D(50, 50, "Seed: " + seed);
-        textRenderer.addStr2D(50, 80, "Iterations: " + iterations);
+        textRenderer.addStr2D(50, 50, "Seed: " + plant.getSeed());
+        textRenderer.addStr2D(50, 80, "Iterations: " + plant.getIterations());
         textRenderer.addStr2D(50, 110, "Rule 1 : S = " + plant.getRuleS());
         textRenderer.addStr2D(50, 140, "Rule 2 : F = " + plant.getRuleF());
         textRenderer.addStr2D(50, 170, "Rule 3a : B1 = " + plant.getRuleB1());
